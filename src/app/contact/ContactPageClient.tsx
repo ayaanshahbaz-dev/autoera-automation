@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Send, Mail, Calendar, CheckCircle2 } from "lucide-react";
+import { Send, Mail, Calendar, CheckCircle2, Loader2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/animations";
 
 export default function ContactPage() {
@@ -93,8 +94,13 @@ export default function ContactPage() {
                   Tell us about your business and what you're looking to automate.
                 </p>
 
+                <AnimatePresence mode="wait">
                 {status === "sent" ? (
-                  <div
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
                     style={{
                       textAlign: "center",
                       padding: "3rem 2rem",
@@ -103,12 +109,18 @@ export default function ContactPage() {
                       borderRadius: 10,
                     }}
                   >
-                    <CheckCircle2 size={48} color="#34d399" style={{ margin: "0 auto 1rem" }} />
+                    <motion.div
+                      initial={{ scale: 0, rotate: -180 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.1 }}
+                    >
+                      <CheckCircle2 size={48} color="#34d399" style={{ margin: "0 auto 1rem" }} />
+                    </motion.div>
                     <h3 style={{ color: "#FFFFFF", fontWeight: 700, marginBottom: "0.5rem" }}>Message Sent!</h3>
                     <p style={{ color: "#A3A3A3", fontSize: "0.9rem" }}>
                       Thanks for reaching out. We'll be in touch within 24 hours.
                     </p>
-                  </div>
+                  </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                     <div className="form-group">
@@ -181,19 +193,24 @@ export default function ContactPage() {
                       </p>
                     )}
 
-                    <button
+                    <motion.button
                       type="submit"
                       disabled={status === "sending"}
-                      className="btn-primary group"
-                      style={{ justifyContent: "center", padding: "0.9rem", opacity: status === "sending" ? 0.7 : 1 }}
+                      className="btn-primary"
+                      style={{ justifyContent: "center", padding: "0.9rem", width: "100%", gap: "0.5rem", display: "flex", alignItems: "center" }}
                       id="contact-form-submit"
+                      whileHover={status !== "sending" ? { scale: 1.02, y: -2, boxShadow: "0px 10px 25px rgba(245,158,11,0.25)" } : {}}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      {status === "sending" ? "Sending..." : (
-                        <>Send Message <Send size={15} className="transition-transform group-hover:translate-x-1" /></>
+                      {status === "sending" ? (
+                        <><Loader2 size={16} style={{ animation: "spin 1s linear infinite" }} /> Sending...</>
+                      ) : (
+                        <>Send Message <Send size={15} /></>
                       )}
-                    </button>
+                    </motion.button>
                   </form>
                 )}
+                </AnimatePresence>
               </div>
             </FadeIn>
 

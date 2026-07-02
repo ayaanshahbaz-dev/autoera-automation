@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ScrollProgress, AnimatedBackground } from "@/components/ui/animations";
+import { MagneticCursor } from "@/components/ui/MagneticCursor";
 
 export const metadata: Metadata = {
   title: "AutoEra Automation | AI Automation Systems for Growing Businesses",

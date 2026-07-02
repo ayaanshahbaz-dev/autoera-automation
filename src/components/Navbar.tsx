@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { MagneticElement } from "@/components/ui/animations";
 
 const navLinks = [
   { label: "Services", href: "/services" },
@@ -79,6 +81,7 @@ function Logo() {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname() || "";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -117,25 +120,47 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div
-          style={{ display: "flex", alignItems: "center", gap: "2rem" }}
+          style={{ display: "flex", alignItems: "center", gap: "2rem", position: "relative" }}
           className="desktop-nav"
         >
-          {navLinks.map((l) => (
+          {navLinks.map((l) => {
+            const isActive = pathname.startsWith(l.href);
+            return (
+              <MagneticElement key={l.href} strength={0.3}>
+                <Link
+                  href={l.href}
+                  className="nav-link interactive"
+                  style={{ position: "relative", padding: "0.5rem 0", color: isActive ? "#FFFFFF" : undefined }}
+                >
+                  {l.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTab"
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: 2,
+                        background: "#F59E0B",
+                        borderRadius: 2
+                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              </MagneticElement>
+            );
+          })}
+          <MagneticElement strength={0.2}>
             <Link
-              key={l.href}
-              href={l.href}
-              className="nav-link"
+              href="/contact"
+              className="btn-primary interactive"
+              style={{ padding: "0.55rem 1.25rem", fontSize: "0.82rem" }}
             >
-              {l.label}
+              Book a Call
             </Link>
-          ))}
-          <Link
-            href="/contact"
-            className="btn-primary"
-            style={{ padding: "0.55rem 1.25rem", fontSize: "0.82rem" }}
-          >
-            Book a Call
-          </Link>
+          </MagneticElement>
         </div>
 
         {/* Mobile hamburger */}

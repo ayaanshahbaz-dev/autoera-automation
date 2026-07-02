@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -13,14 +14,12 @@ import {
   CheckCircle2,
   Calendar,
 } from "lucide-react";
-import type { Metadata } from "next";
-import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/ui/animations";
-
-export const metadata: Metadata = {
-  title: "AutoEra Automation | AI Automation Systems for Growing Businesses",
-  description:
-    "Stop losing leads to slow follow-up and drowning in manual admin. AutoEra builds AI automation systems that run your repetitive work 24/7 — so you can focus on growing.",
-};
+import { motion } from "framer-motion";
+import { FadeIn, FadeInStagger, FadeInStaggerItem, WordReveal, AnimatedGradientText, RippleButton, TiltCard } from "@/components/ui/animations";
+import { FloatingDashboard } from "@/components/showcase/FloatingDashboard";
+import { WorkflowVisualizer } from "@/components/showcase/WorkflowVisualizer";
+import { LiveChatPreview } from "@/components/showcase/LiveChatPreview";
+import { FloatingMetrics } from "@/components/showcase/FloatingMetrics";
 
 const painPoints = [
   { icon: TrendingDown, title: "Missed Leads", desc: "Prospects reach out after hours or get a slow reply — and go with your competitor instead." },
@@ -60,60 +59,77 @@ export default function HomePage() {
         <div style={{ position: "absolute", top: "20%", right: "8%", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%)", filter: "blur(50px)", pointerEvents: "none" }} className="animate-float" />
         <div style={{ position: "absolute", bottom: "10%", left: "5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle, rgba(251,146,60,0.06) 0%, transparent 70%)", filter: "blur(40px)", pointerEvents: "none" }} />
 
-        <div className="container-xl" style={{ position: "relative" }}>
-          <FadeInStagger className="max-w-3xl" delay={0.15}>
-            <FadeInStaggerItem>
-              <div style={{ marginBottom: "1.25rem" }}>
-                <span className="eyebrow">AI Automation Agency</span>
-              </div>
-            </FadeInStaggerItem>
-
-            <FadeInStaggerItem>
-              <h1
-                style={{
-                  fontSize: "clamp(2.4rem, 5.5vw, 4rem)",
-                  fontWeight: 900,
-                  lineHeight: 1.08,
-                  letterSpacing: "-0.035em",
-                  color: "#FFFFFF",
-                  marginBottom: "1.5rem",
-                  fontFamily: "'Space Grotesk', sans-serif",
-                }}
-              >
-                AI Automation Systems for{" "}
-                <span className="gradient-text">Growing Businesses</span>
-              </h1>
-            </FadeInStaggerItem>
-
-            <FadeInStaggerItem>
-              <p style={{ fontSize: "1.1rem", color: "#A3A3A3", lineHeight: 1.75, maxWidth: 560, marginBottom: "2.5rem" }}>
-                Stop losing leads and drowning in manual admin. We build intelligent automation systems that capture every inquiry, support your customers, and handle the repetitive work — 24/7, while you focus on growth.
-              </p>
-            </FadeInStaggerItem>
-
-            <FadeInStaggerItem>
-              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                <Link href="/contact" className="btn-primary" id="hero-cta-primary" style={{ padding: "0.85rem 2rem", fontSize: "0.9rem" }}>
-                  Book a Free Call <ArrowRight size={16} />
-                </Link>
-                <Link href="/case-studies" className="btn-ghost" id="hero-cta-secondary" style={{ padding: "0.85rem 2rem", fontSize: "0.9rem" }}>
-                  See Case Studies
-                </Link>
-              </div>
-            </FadeInStaggerItem>
-
-            {/* Social proof mini */}
-            <FadeInStaggerItem>
-              <div style={{ marginTop: "2.5rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                <div style={{ display: "flex", gap: "0.4rem" }}>
-                  {[...Array(3)].map((_, i) => (
-                    <div key={i} style={{ width: 28, height: 28, borderRadius: "50%", background: `linear-gradient(135deg, hsl(${30 + i * 15}, 85%, 55%) 0%, hsl(${20 + i * 10}, 90%, 45%) 100%)`, border: "2px solid #080808", marginLeft: i > 0 ? -8 : 0 }} />
-                  ))}
+        <div className="container-xl" style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "2rem" }}>
+          <div style={{ flex: 1, maxWidth: 640 }}>
+            <FadeInStagger delay={0.15}>
+              <FadeInStaggerItem>
+                <div style={{ marginBottom: "1.25rem" }}>
+                  <span className="eyebrow">AI Automation Agency</span>
                 </div>
-                <span style={{ color: "#737373", fontSize: "0.83rem" }}>Trusted by service businesses in UK, US & AU</span>
-              </div>
-            </FadeInStaggerItem>
-          </FadeInStagger>
+              </FadeInStaggerItem>
+
+              <FadeInStaggerItem>
+                <h1
+                  style={{
+                    fontSize: "clamp(2.4rem, 5.5vw, 4rem)",
+                    fontWeight: 900,
+                    lineHeight: 1.08,
+                    letterSpacing: "-0.035em",
+                    color: "#FFFFFF",
+                    marginBottom: "1.5rem",
+                    fontFamily: "'Space Grotesk', sans-serif",
+                  }}
+                >
+                  <WordReveal text="AI Automation Systems for" delay={0.1} />{" "}
+                  <AnimatedGradientText>Growing Businesses</AnimatedGradientText>
+                </h1>
+              </FadeInStaggerItem>
+
+              <FadeInStaggerItem>
+                <p style={{ fontSize: "1.1rem", color: "#A3A3A3", lineHeight: 1.75, maxWidth: 560, marginBottom: "2.5rem" }}>
+                  Stop losing leads and drowning in manual admin. We build intelligent automation systems that capture every inquiry, support your customers, and handle the repetitive work — 24/7, while you focus on growth.
+                </p>
+              </FadeInStaggerItem>
+
+              <FadeInStaggerItem>
+                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+                  <Link href="/contact" style={{ textDecoration: "none" }}>
+                    <RippleButton className="btn-primary" id="hero-cta-primary" style={{ padding: "0.85rem 2rem", fontSize: "0.9rem" }}>
+                      Book a Free Call <ArrowRight size={16} />
+                    </RippleButton>
+                  </Link>
+                  <Link href="/case-studies" className="btn-ghost" id="hero-cta-secondary" style={{ padding: "0.85rem 2rem", fontSize: "0.9rem" }}>
+                    See Case Studies
+                  </Link>
+                </div>
+              </FadeInStaggerItem>
+
+              {/* Social proof mini */}
+              <FadeInStaggerItem>
+                <div style={{ marginTop: "2.5rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <div style={{ display: "flex", gap: "0.4rem" }}>
+                    {[...Array(3)].map((_, i) => (
+                      <div key={i} style={{ width: 28, height: 28, borderRadius: "50%", background: `linear-gradient(135deg, hsl(${30 + i * 15}, 85%, 55%) 0%, hsl(${20 + i * 10}, 90%, 45%) 100%)`, border: "2px solid #080808", marginLeft: i > 0 ? -8 : 0 }} />
+                    ))}
+                  </div>
+                  <span style={{ color: "#737373", fontSize: "0.83rem" }}>Trusted by service businesses in UK, US & AU</span>
+                </div>
+              </FadeInStaggerItem>
+            </FadeInStagger>
+          </div>
+
+          <div style={{ flex: 1.2, position: "relative", height: 600, display: "flex", justifyContent: "center", alignItems: "center" }} className="hero-showcase">
+             <div style={{ position: "absolute", zIndex: 3, top: "10%", right: "0%", animation: "float 5s ease-in-out infinite", animationDelay: "1s" }}>
+                <LiveChatPreview />
+             </div>
+             <div style={{ position: "absolute", zIndex: 2, top: "25%", left: "5%", width: 340 }}>
+                <FloatingDashboard />
+             </div>
+             <div style={{ position: "absolute", zIndex: 1, bottom: "5%", right: "15%", width: 260 }}>
+                <WorkflowVisualizer />
+             </div>
+             <FloatingMetrics />
+          </div>
         </div>
       </section>
 
@@ -166,14 +182,16 @@ export default function HomePage() {
 
           <FadeInStagger className="pain-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }}>
             {painPoints.map((p) => (
-              <FadeInStaggerItem key={p.title} className="card" style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start" }}>
-                <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 10, background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.18)", display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
-                  <p.icon size={20} color="#F59E0B" className="icon-hover-rotate" />
-                </div>
-                <div>
-                  <h3 style={{ color: "#FFFFFF", fontWeight: 600, marginBottom: "0.4rem", fontSize: "1rem" }}>{p.title}</h3>
-                  <p style={{ color: "#A3A3A3", fontSize: "0.88rem", lineHeight: 1.65 }}>{p.desc}</p>
-                </div>
+              <FadeInStaggerItem key={p.title}>
+                <TiltCard className="card" style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start", height: "100%" }}>
+                  <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 10, background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.18)", display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
+                    <p.icon size={20} color="#F59E0B" className="icon-hover-rotate" />
+                  </div>
+                  <div>
+                    <h3 style={{ color: "#FFFFFF", fontWeight: 600, marginBottom: "0.4rem", fontSize: "1rem" }}>{p.title}</h3>
+                    <p style={{ color: "#A3A3A3", fontSize: "0.88rem", lineHeight: 1.65 }}>{p.desc}</p>
+                  </div>
+                </TiltCard>
               </FadeInStaggerItem>
             ))}
           </FadeInStagger>
@@ -198,18 +216,28 @@ export default function HomePage() {
           <FadeInStagger className="services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }}>
             {services.map((s) => (
               <FadeInStaggerItem key={s.title}>
-                <Link href={s.href} style={{ textDecoration: "none" }}>
-                  <div className="card group" style={{ height: "100%" }}>
-                    <div style={{ width: 48, height: 48, borderRadius: 11, background: `${s.color}12`, border: `1px solid ${s.color}25`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.25rem" }} className="icon-hover-rotate">
-                      <s.icon size={22} color={s.color} />
+                <TiltCard style={{ height: "100%" }}>
+                  <Link href={s.href} style={{ textDecoration: "none", display: "block", height: "100%" }}>
+                    <div className="card group" style={{ height: "100%" }}>
+                      <div style={{ width: 48, height: 48, borderRadius: 11, background: `${s.color}12`, border: `1px solid ${s.color}25`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.25rem" }} className="icon-hover-rotate">
+                        <s.icon size={22} color={s.color} />
+                      </div>
+                      <h3 style={{ color: "#FFFFFF", fontWeight: 700, fontSize: "1rem", marginBottom: "0.6rem", fontFamily: "'Space Grotesk', sans-serif" }}>{s.title}</h3>
+                      <p style={{ color: "#A3A3A3", fontSize: "0.88rem", lineHeight: 1.65, marginBottom: "1.25rem" }}>{s.desc}</p>
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", color: s.color, fontSize: "0.83rem", fontWeight: 600, overflow: "hidden" }}>
+                        Learn more
+                        <motion.span
+                          initial={{ x: 0 }}
+                          whileHover={{ x: 4 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                          style={{ display: "inline-flex" }}
+                        >
+                          <ArrowRight size={13} />
+                        </motion.span>
+                      </div>
                     </div>
-                    <h3 style={{ color: "#FFFFFF", fontWeight: 700, fontSize: "1rem", marginBottom: "0.6rem", fontFamily: "'Space Grotesk', sans-serif" }}>{s.title}</h3>
-                    <p style={{ color: "#A3A3A3", fontSize: "0.88rem", lineHeight: 1.65, marginBottom: "1.25rem" }}>{s.desc}</p>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", color: s.color, fontSize: "0.83rem", fontWeight: 600 }}>
-                      Learn more <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" style={{ transition: 'transform 0.3s ease' }} />
-                    </div>
-                  </div>
-                </Link>
+                  </Link>
+                </TiltCard>
               </FadeInStaggerItem>
             ))}
           </FadeInStagger>
@@ -317,6 +345,9 @@ export default function HomePage() {
       </section>
 
       <style>{`
+        @media (max-width: 1024px) {
+          .hero-showcase { display: none !important; }
+        }
         @media (max-width: 768px) {
           .case-grid { grid-template-columns: 1fr !important; }
           .pain-grid { grid-template-columns: 1fr !important; }
