@@ -59,8 +59,8 @@ export default function HomePage() {
         <div style={{ position: "absolute", top: "20%", right: "8%", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%)", filter: "blur(50px)", pointerEvents: "none" }} className="animate-float" />
         <div style={{ position: "absolute", bottom: "10%", left: "5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle, rgba(251,146,60,0.06) 0%, transparent 70%)", filter: "blur(40px)", pointerEvents: "none" }} />
 
-        <div className="container-xl" style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "3rem", flexWrap: "wrap" }}>
-          <div style={{ flex: "1 1 500px", maxWidth: 640 }}>
+        <div className="container-xl" style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "2rem" }}>
+          <div style={{ flex: 1, maxWidth: 640 }}>
             <FadeInStagger delay={0.15}>
               <FadeInStaggerItem>
                 <div style={{ marginBottom: "1.25rem" }}>
@@ -118,17 +118,21 @@ export default function HomePage() {
             </FadeInStagger>
           </div>
 
-          <div style={{ flex: "1 1 500px", position: "relative", height: 600, display: "flex", justifyContent: "center", alignItems: "center" }} className="hero-showcase">
-             <div style={{ position: "absolute", zIndex: 3, top: "10%", right: "0%", animation: "float 5s ease-in-out infinite", animationDelay: "1s" }}>
-                <LiveChatPreview />
+          <div style={{ flex: 1, position: "relative", height: 600, display: "flex", justifyContent: "flex-end", alignItems: "center" }} className="hero-showcase">
+             <div style={{ position: "relative", width: "100%", maxWidth: 500, height: "100%" }}>
+               <div style={{ position: "absolute", zIndex: 3, top: "10%", right: "-5%", animation: "float 5s ease-in-out infinite", animationDelay: "1s" }}>
+                  <LiveChatPreview />
+               </div>
+               <div style={{ position: "absolute", zIndex: 2, top: "25%", right: "35%", width: 340 }}>
+                  <FloatingDashboard />
+               </div>
+               <div style={{ position: "absolute", zIndex: 1, bottom: "5%", right: "15%", width: 260 }}>
+                  <WorkflowVisualizer />
+               </div>
+               <div style={{ position: "absolute", inset: 0 }}>
+                 <FloatingMetrics />
+               </div>
              </div>
-             <div style={{ position: "absolute", zIndex: 2, top: "25%", right: "35%", width: 340 }}>
-                <FloatingDashboard />
-             </div>
-             <div style={{ position: "absolute", zIndex: 1, bottom: "5%", right: "15%", width: 260 }}>
-                <WorkflowVisualizer />
-             </div>
-             <FloatingMetrics />
           </div>
         </div>
       </section>
