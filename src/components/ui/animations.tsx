@@ -200,7 +200,7 @@ export function WordReveal({ text, className = "", delay = 0 }: { text: string; 
         visible: { transition: { staggerChildren: 0.12, delayChildren: delay } },
         hidden: {},
       }}
-      style={{ display: "inline-block" }}
+      style={{ display: "inline" }}
     >
       {words.map((word, i) => (
         <motion.span
@@ -227,7 +227,7 @@ export function AnimatedGradientText({ children, className = "" }: { children: R
       initial={prefersReducedMotion ? {} : { backgroundPosition: "0% 50%" }}
       animate={prefersReducedMotion ? {} : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
       transition={{ duration: 5, ease: "linear", repeat: Infinity }}
-      style={{ backgroundSize: "200% 200%", display: "inline-block" }}
+      style={{ backgroundSize: "200% 200%", display: "inline" }}
     >
       {children}
     </motion.span>
