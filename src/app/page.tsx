@@ -118,18 +118,26 @@ export default function HomePage() {
             </FadeInStagger>
           </div>
 
-          <div style={{ flex: 1, position: "relative", height: 600, display: "flex", justifyContent: "flex-end", alignItems: "center" }} className="hero-showcase">
-             <div style={{ position: "relative", width: "100%", maxWidth: 500, height: "100%" }}>
-               <div style={{ position: "absolute", zIndex: 3, top: "10%", right: "-5%", animation: "float 5s ease-in-out infinite", animationDelay: "1s" }}>
+          <div style={{ flex: 1, display: "flex", justifyContent: "flex-end", alignItems: "center" }} className="hero-showcase">
+             {/* 500x600 Bounding Box for predictable absolute positioning */}
+             <div style={{ position: "relative", width: 500, height: 600, flexShrink: 0 }}>
+               {/* Top Right: Live Chat */}
+               <div style={{ position: "absolute", zIndex: 3, top: 20, right: 0, animation: "float 5s ease-in-out infinite", animationDelay: "1s" }}>
                   <LiveChatPreview />
                </div>
-               <div style={{ position: "absolute", zIndex: 2, top: "25%", right: "35%", width: 340 }}>
+               
+               {/* Middle Left: Dashboard */}
+               <div style={{ position: "absolute", zIndex: 2, top: 180, left: 0, width: 340 }}>
                   <FloatingDashboard />
                </div>
-               <div style={{ position: "absolute", zIndex: 1, bottom: "5%", right: "15%", width: 260 }}>
+               
+               {/* Bottom Center: Workflow */}
+               <div style={{ position: "absolute", zIndex: 1, bottom: 40, left: 80, width: 280 }}>
                   <WorkflowVisualizer />
                </div>
-               <div style={{ position: "absolute", inset: 0 }}>
+               
+               {/* Floating Metrics (these have their own absolute positions) */}
+               <div style={{ position: "absolute", inset: 0, zIndex: 4, pointerEvents: "none" }}>
                  <FloatingMetrics />
                </div>
              </div>

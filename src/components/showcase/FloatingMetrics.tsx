@@ -73,8 +73,8 @@ export function FloatingMetrics() {
         icon={Zap}
         color="#F59E0B"
         delay={0.5}
-        top="10%"
-        left="-10%"
+        top={60}
+        left={-20}
       />
       <MetricCard
         title="Tasks Automated"
@@ -83,8 +83,8 @@ export function FloatingMetrics() {
         icon={CheckCircle}
         color="#34d399"
         delay={1.2}
-        bottom="15%"
-        right="-5%"
+        bottom={120}
+        right={-10}
       />
       <MetricCard
         title="Leads Captured"
@@ -92,8 +92,8 @@ export function FloatingMetrics() {
         icon={Users}
         color="#3b82f6"
         delay={2.5}
-        top="45%"
-        left="-20%"
+        top={320}
+        left={-40}
       />
     </div>
   );
